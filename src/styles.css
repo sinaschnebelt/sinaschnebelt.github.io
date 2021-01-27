@@ -1,0 +1,272 @@
+h1 {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  text-align: center;
+  font-size: 38px;
+  color: darkslategrey;
+  padding-top: 40px;
+}
+
+
+.h3{
+  font-size: 2.9rem;
+  margin:0px;
+}
+
+.date-picker{
+  width: 40%;
+  margin: auto;
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 1.0;
+  shape-rendering: crispEdges;
+}
+
+.grid path {
+  stroke-width: 0;
+}
+
+img{
+  padding: 20px;
+}
+
+.button-width{
+width: 120px;
+display: table !important;
+}
+
+#y-axis .tick line{
+  visibility:hidden;
+}
+
+
+.map-germany {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+
+}
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  vertical-align: middle; 
+  overflow: hidden; 
+}
+.svg-content-responsive {
+  display: inline-block;
+  top: 0;
+  left: 0;
+}
+
+
+.hidden {
+  display: none;
+}
+
+#chartPlaceholderContainer{
+  height: 27vh;
+}
+
+#titleContainer{
+  background-color: teal;
+  text-align: center;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: white;
+  height: 16vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+#btnContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5;
+}
+
+.btn-group>.btn-inactive {
+  background-color: #e5f2f2;
+  width: 110px;
+  margin-top: 3px;
+  color:teal
+}
+
+.btn-group>.btn {
+  -webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
+  white-space: normal;
+
+}
+
+.btn-group>.btn-inactive:hover {
+  background-color: #728F9D;
+}
+.btn-group>.btn:hover {
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+#selectedDate{
+  background-color:teal;
+  color: white
+}
+#selectedTransport{
+  background-color: #cfd9dd;
+  border: solid teal;
+  cursor: pointer;
+}
+#treemapOption{
+  background-color:teal;
+}
+
+#visualisationContainer{
+  min-height: 100vh;
+  background-color: #e5f2f2;
+}
+#treemapContainer{
+  min-height: 100vh;
+  padding:50px;
+}
+#treemapwrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#treemapwrapper2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#iconContainer{
+  height:8vh; 
+  margin-bottom:0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icons{
+  height:8vh; 
+  margin-left:auto;
+  margin-right:auto;
+
+}
+#wordCloudContainer{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding:50px;
+}
+
+#car{
+  width: 8vh;
+  padding:0;
+  margin: 2vh;
+
+}
+#transit, #walk{
+  width: 7vh;
+  padding:0;
+  margin: 2vh;
+
+}
+
+#lineChartContainer{
+  padding-top: 50px;
+  height: 35vh;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+}
+
+
+#BevölkerungsdichteContainer{
+  margin-top: 20px;;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  vertical-align: middle;
+
+}
+#BevölkerungsdichteContainer>div{
+  /* margin-left: auto;
+  margin-right: auto;  */
+  font-weight: bold;
+  text-align: center;
+  height: 11vh;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  vertical-align: middle;
+  margin: auto;
+  padding-bottom: auto;
+  
+} 
+
+#BevölkerungsdichteContainer>div>div{
+
+  margin: auto;
+  padding-bottom: auto;
+  
+} 
+.blPar{
+  /* vertical-align: middle; */
+  padding: 1vh;
+  margin:0;
+  padding-top: auto;
+  padding-bottom: auto;
+
+}
+
+.modal {
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+  padding: 0;
+  max-height: 40%;
+  width: 35%;
+  will-change: top, opacity;
+}
+
+#toast-container {
+  right: auto !important;
+  bottom: 50%;
+  left:4%;
+  top: auto !important;
+}
+
+.material-icons{
+  color: teal;
+}
+
+
+.tabs .tab a{
+  color:teal!important;
+  background-color: white;
+}
+.tabs .tab a:hover {
+  background-color:#cfd9dd!important;
+  color:white!important;
+}
+.tabs .tab a.active {
+  background-color:teal!important;
+  color:white!important;
+} /*Background and text color when a tab is active*/
+
+.tabs .indicator {
+  background-color:white!important;
+  height: 20px;
+} /*Color of underline*/
+
+
