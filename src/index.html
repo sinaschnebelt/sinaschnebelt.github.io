@@ -11,7 +11,9 @@
     <link rel="icon" href="data:,"> <!-- so that dev tools are quiet -->
     <title>InfoVis Project</title>
     <link rel="stylesheet" href="styles.css">
-
+    <script type="text/javascript">
+        document.head.innerHTML = document.head.innerHTML + "<base href='" + document.location.href + "' />";
+    </script>
     <!-- jQuery needs to be imported before materialize.js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -34,7 +36,7 @@
     <script type="module" src="/src/scripts/getLineChartData.js" ></script>
     <script type="module" src="/src/scripts/treeMapView.js"></script>
     <script type="module" language="text/javascript" src="/src/scripts/treeMapMobilityView.js"></script>
-
+   
 </head>
 
 <body>
