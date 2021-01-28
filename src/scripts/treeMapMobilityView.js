@@ -188,7 +188,7 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
         }})
     .attr('class', 'icon')
     .attr("x", function(d){ return d.x0+10})    // +10 to adjust position (more right)
-    .attr("y", function(d){ return d.y0+30}) 
+    .attr("y", function(d){ return d.y0+10}) 
     .attr('width', 40)
     .attr('height', 40)
 
@@ -199,7 +199,7 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
      .enter()
      .append("text")
      .attr("x", function(d){ return d.x0+15})    // +10 to adjust position (more right)
-     .attr("y", function(d){ return d.y0+70})    // +20 to adjust position (lower)
+     .attr("y", function(d){ return d.y0+50})    // +20 to adjust position (lower)
      .attr("dy", "1.1em")
      .text(function(d){ 
          // Temporal: kurze Syntax und bessere Images
