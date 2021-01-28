@@ -29,7 +29,7 @@ h1 {
 }
 
 img{
-  padding: 20px;
+  padding: 10px;
 }
 
 .button-width{
@@ -173,15 +173,16 @@ display: table !important;
 }
 
 #car{
-  width: 7vh;
-  padding:0;
-  margin: 2vh;
+  width: 5.3vh;
+  padding:0vh;
 
 }
 #transit, #walk{
-  width: 6vh;
-  padding:0;
-  margin: 2vh;
+  width: 4.1vh;
+  padding:0vh;
+  /* margin-top: 1.5vh;
+  margin-bottom: 1.5; */
+
 
 }
 
