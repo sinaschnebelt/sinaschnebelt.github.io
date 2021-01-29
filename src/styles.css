@@ -174,13 +174,29 @@ display: table !important;
 }
 
 #car{
-  width: 6vh;
-  padding:0vh;
+
+
+  height: 45px;
+  background-image: url('../src/img/Auto_icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 
 }
-#transit, #walk{
-  width: 5vh;
-  padding:0vh;
+#transit{
+
+  height: 50px;
+  background-image: url('../src/img/Transit_icon.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+#walk{
+
+
+  height: 50px;
+  background-image: url("../src/img/Walking_icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
 
 }
 
