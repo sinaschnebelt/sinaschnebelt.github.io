@@ -1,16 +1,17 @@
 import { FetchData } from './getLineChartData.js';
-import { gatheredMonthlyData } from '../data/gatheredMonthlyData.js';
-import { AllData } from '../data/summedData.js';
-let svg, xAxis, yAxis, currentDomain, clickedBar;
-const blDomainStorage = [];
+import { Covid19casesBundeslaenderMonthly, Covid19casesGermanyMonthly } from '../data/covid19Cases.js';
+let svg, xAxis, yAxis, clickedBar;
+let colors = ["#0f5858", "#c4d2cc"]
+
 
 const margin = {top:40, right: 160, bottom: 80, left: 60},
   width = 1000 - margin.left - margin.right,
-  height = 330 - margin.top - margin.bottom;
+  height = 320 - margin.top - margin.bottom;
 
-export async function ShowDEData(selectedMonth, allData){
+
+export async function ShowDEData(selectedMonth, covid19casesGermanyMonthly){
     const month = new Date(selectedMonth[0]).getMonth();
-    const casesDE = allData[month];
+    const casesDE = covid19casesGermanyMonthly[month];
 
     removeDEData();
     /** Function should load the axis and the graph for DE when loading the page (default month)
@@ -25,7 +26,7 @@ export async function ShowDEData(selectedMonth, allData){
       .data(casesDE)
       .enter().append("rect")
       .attr("class", "bar")
-      .attr("fill", "#b2dfdb")
+      .attr("fill", colors[1])
       .attr("x", d => xAxis(new Date(d.Meldedatum))-8)
       .attr("y", d => yAxis(new Date(d.Infos.AnzahlFall)))
       .attr("width", 16)
@@ -60,14 +61,14 @@ function clickBar(){
   // Reset previously clicked bar
   if(clickedBar != undefined){
     clickedBar
-      .attr("fill", "#b2dfdb")
+      .attr("fill", colors[1])
       .classed("clicked-bar", false)
   }
   clickedBar = d3.select(this);
   clickedBar.classed("clicked-bar", true);
 
   d3.select(this)
-    .attr("fill", "#008080"); 
+    .attr("fill", colors[0]); 
 
 
   const cases = clickedBar._groups[0][0].__data__.Infos.AnzahlFall;
@@ -79,7 +80,7 @@ function clickBar(){
     .attr("text-anchor", "start")
     .attr("class", "cases-germany")
     .attr("transform", `translate(${width+70}, ${40})`)
-    .attr("fill", "#008080")
+    .attr("fill", "#2b331f")
     .attr("x", 15)
     .attr("dy", ".35em")
     .style("font-family", "Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell, Helvetica Neue,sans-serif")
@@ -99,7 +100,6 @@ function updateCaseNumbers(){
     const shownCurves = svg.selectAll(".curve.selected-curve")._groups[0]
 
     svg.selectAll(".case-numbers").remove(); 
-    svg.select(".case-numbers-label").remove(); 
     
     if(shownCurves !== undefined){
 
@@ -140,17 +140,20 @@ export function UpdateLineChartPathMonth(selectedMonth, selectedBL){
 export function AddBundeslandToLineChart(bundesland, selectedMonth, selectedBL, selectedColor){
   const month = new Date(selectedMonth[0]).getMonth();
 
-  const dataOfSelectedMonthBl = gatheredMonthlyData[month][bundesland];
+  const dataOfSelectedMonthBl = Covid19casesBundeslaenderMonthly[month][bundesland];
   visualiseCurve(svg, dataOfSelectedMonthBl, bundesland, selectedColor);
 
   adjustMonthlyAverageBL(selectedBL, selectedMonth);
-  // Needed for intersection detection in lineChartView.js
+  
+  // Needed for updating the shown case numbers when a different month gets selected
   d3.select(".curve."+bundesland)._groups[0][0].classList.add('selected-curve');
+  
   updateCaseNumbers(); 
-   // If the internet connection is fast enough the data could be fetched live
+  
+  // If the internet connection is fast enough the data can also be fetched live
   /*FetchData(bundesland, selectedMonth)
     .then((data) => {
-      visualiseCurve(svg, data, bundesland, selectedColor); //"#D58E00"
+      visualiseCurve(svg, data, bundesland, selectedColor); 
     })
     .then(() => {
       adjustLegend(selectedBL, bundesland);
@@ -175,15 +178,15 @@ function adjustMonthlyAverageDE(selectedMonth){
   const month = new Date(selectedMonth[0]).getMonth();
 
   let monthlyTotalDE = 0;
-  AllData[month].forEach(day => {
+  Covid19casesGermanyMonthly[month].forEach(day => {
     monthlyTotalDE += day.Infos.AnzahlFall;
   })
-  let monthlyAverageDE = Math.floor(monthlyTotalDE/AllData[month].length);
+  let monthlyAverageDE = Math.floor(monthlyTotalDE/Covid19casesGermanyMonthly[month].length);
   
   svg.append("text")
         .attr("class", "legend-de")
         .attr("text-anchor", "left")
-        .attr("fill", "#008080")
+        .attr("fill", "#2b331f")
         .style("font-weight", "bold")
         .attr("transform", () => {
            return `translate(${margin.left}, ${height+margin.bottom-30})`
@@ -194,19 +197,19 @@ function adjustMonthlyAverageDE(selectedMonth){
   svg.append("text")
         .attr("class", "legend-de")
         .attr("text-anchor", "left")
-        .attr("fill", "#008080")
+        .attr("fill", "#2b331f")
         .style("font-weight", "bold")
         .attr("transform", () => {
            return `translate(${margin.left}, ${height+margin.bottom-15})`
         }) 
         .style("font-family", "BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell, Helvetica Neue,sans-serif")
-        .text("pro Tag ø");
+        .text("pro Tag (Monatsdurchschnitt)");
 
 
   svg.append("text")
         .attr("class", "legend-de")
         .attr("text-anchor", "left")
-        .attr("fill", "#008080")
+        .attr("fill", "#2b331f")
         .style("font-weight", "bold")
         .attr("transform", () => {
            return `translate(${margin.left}, ${height+margin.bottom+5})`
@@ -219,7 +222,7 @@ function adjustMonthlyAverageDE(selectedMonth){
   svg.append("text")
     .attr("text-anchor", "start")
     .attr("class", "gemeldete-infektionen")
-    .attr("fill", "#008080")
+    .attr("fill", "#2b331f")
     .attr("transform", `translate(${width+70}, 0)`)
     .attr("x", 15)
     .attr("dy", ".35em")
@@ -230,7 +233,7 @@ function adjustMonthlyAverageDE(selectedMonth){
   svg.append("text")
     .attr("text-anchor", "start")
     .attr("class", "gemeldete-infektionen")
-    .attr("fill", "#008080")
+    .attr("fill", "#2b331f")
     .attr("transform", `translate(${width+70}, 15)`)
     .attr("x", 15)
     .attr("dy", ".35em")
@@ -246,11 +249,11 @@ function adjustMonthlyAverageBL(selectedBL, selectedMonth){
 
   selectedBL.forEach((bundesland, i) => {
     let monthlyBundesland = 0;
-    gatheredMonthlyData[month][bundesland].forEach(day => {
+    Covid19casesBundeslaenderMonthly[month][bundesland].forEach(day => {
       monthlyBundesland += day.Infos.AnzahlFall;
     })
 
-    let monthlyAverageBundesland = Math.floor(monthlyBundesland/gatheredMonthlyData[month][bundesland].length);
+    let monthlyAverageBundesland = Math.floor(monthlyBundesland/Covid19casesBundeslaenderMonthly[month][bundesland].length);
     
     const usedColor = d3.select("."+bundesland+".map")._groups[0][0].getAttribute('fill');
     const position1 = ((width+margin.left)/4)+40
@@ -336,13 +339,10 @@ function removeDEData(){
   */
   svg.select(".y-axis").remove(); 
   svg.select(".x-axis").remove();
-  svg.select(".area").remove();
-  svg.select(".DE").remove();
   svg.selectAll(".bar").remove();
   svg.selectAll(".y-label").remove();  
   svg.selectAll(".grid").remove();
   svg.selectAll(".case-numbers").remove(); 
-  svg.select(".case-numbers-label").remove(); 
   svg.select(".gemeldete-infektionen").remove();
   svg.select(".cases-germany").remove(); 
 }
@@ -363,11 +363,7 @@ export function InitializeSVG(){
 
 
 function addAxes(data){
-  /** The next 7 lines initialize and format the labels of the xAxis nicely.    
-    If there are too less dates will be repeated on the x-axis. To avoid that we have to create a function 
-    for that edge case and work with xa.tickValues to set the labels manually.
-    xA.tickValues([new Date(data[0].Meldedatum), new Date(data[1].Meldedatum), new Date(data[2].Meldedatum)])
-  */
+  // The next lines initialize and format the labels of the xAxis nicely.    
   xAxis = d3.scaleTime()
               .domain(d3.extent(data, item => new Date(item.Meldedatum)))
               .range([0, width]);
@@ -400,11 +396,6 @@ function addAxes(data){
       .style("text-anchor", "end") //makes sure that the end of the text string is anchored to the ticks
       .style("font-family", "Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell, Helvetica Neue,sans-serif")
 
-  /** Hides the last label, because that would display the next month which might be misleading.
-    Makes sure that still all the data of the month is fetched.
-  */     
-  //const labelNodelist = svg.selectAll("text")._groups[0];
-  //labelNodelist[labelNodelist.length-1].style.visibility = "hidden"
 
   // Initializes and formats the yAxis
   yAxis = d3.scaleLinear()
@@ -429,7 +420,4 @@ function addAxes(data){
               .tickSize(-width)
               .tickFormat("")
       );
-
-  const domain = d3.scaleLinear().domain([0, d3.max(data, item => item.Infos.AnzahlFall)])
-  currentDomain = domain.domain()[1]
 }

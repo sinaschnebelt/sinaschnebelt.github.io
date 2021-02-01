@@ -108,15 +108,15 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
      d3.select("#treemapwrapper2").select("svg").remove();
  
      var margin = {top: 0, right: 30, bottom: 30, left: 30},
-     width = 580 - margin.left - margin.right,
-     height = 350 - margin.top - margin.bottom;
+     width = 700 - margin.left - margin.right,
+     height = 340 - margin.top - margin.bottom;
  
      var svg = d3.select("#treemapwrapper2")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 580 350")
+        .attr("viewBox", "0 0 700 340")
         .classed("svg-content-responsive", true)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -125,7 +125,7 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
      // The coordinates are added to the root object above
     const treemap= d3.treemap()
         .size([width, height])
-        .padding(4)
+        .padding(2)
         .paddingInner(2)
         .round(true)
         (hgroup)
@@ -230,13 +230,11 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
      for (let m=1; m<13; m++){ // loop over months
          if (m<10) month="0"+m;
          else month=m.toString();
-        // console.log(month)
  
          for (let d=1; d<32; d++){  // loop over days
              if(monthName == "" || monthName != month){  // first calculation of the average or calculation of the new month
                  monthName = month;
                  counter = 0;
-                // console.log("monthname: " + monthname + "monthtype:" + typeof(month) + " counter: " + counter)
              } 
  
              if (d<10) day="0"+d; 
@@ -255,75 +253,63 @@ export function UpdateSelectedRegionsList(regionParam, regionSelected, monthPara
                          case "01":
                              janSum += parseFloat(element[ymd])
                              janAvg = janSum/counter
-                            // console.log(month + " " + typeof(month))
+
                              element[month] = janAvg.toFixed(2)
-                             //console.log(ymd + " " + "sum: " + parseFloat(janSum) + " counter: " + counter + " result: " + janResult)
                              break;
                          case "02":
                              febSum += parseFloat(element[ymd])
                              febAvg = febSum /counter
                              element[month] = febAvg.toFixed(2)
-                            // console.log(ymd + " " + "sum: " + parseFloat(febSum)  + " counter: " + counter + " result: " + febAvg)
                              break;
                          case "03":
                              marSum += parseFloat(element[ymd])
                              marAvg = marSum /counter
                              element[month] = marAvg.toFixed(2)
-                            // console.log(ymd + " " + "sum: " + parseFloat(marSum)  + " counter: " + counter + " result: " + marAvg)
                              break;
                          case "04":
                              aprSum += parseFloat(element[ymd])
                              aprAvg = aprSum /counter
                              element[month] = aprAvg.toFixed(2)
-                            // console.log(ymd + " " + "sum: " + parseFloat(aprSum)  + " counter: " + counter + " result: " + aprAvg)
                              break;
                          case "05":
                              maySum += parseFloat(element[ymd])
                              mayAvg = maySum /counter
                              element[month] = mayAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(maySum)  + " counter: " + counter + " result: " + mayAvg)
                              break;
                          case "06":
                              junSum += parseFloat(element[ymd])
                              junAvg = junSum /counter
                              element[month] = junAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(junSum)  + " counter: " + counter + " result: " + junAvg)
                              break;
                          case "07":
                              julSum += parseFloat(element[ymd])
                              julAvg = julSum /counter
                              element[month] = julAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(julSum)  + " counter: " + counter + " result: " + julAvg)
                              break;
                          case "08":
                              augSum += parseFloat(element[ymd])
                              augAvg = augSum /counter
                              element[month] = augAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(augSum)  + " counter: " + counter + " result: " + augAvg)
                              break;
                          case "09":
                              sepSum += parseFloat(element[ymd])
                              sepAvg = sepSum /counter
                              element[month] = sepAvg.toFixed(2)
-                          ///   console.log(ymd + " " + "sum: " + parseFloat(sepSum)  + " counter: " + counter + " result: " + sepAvg)
                              break;
                          case "10":    
                              octSum += parseFloat(element[ymd])
                              octAvg = octSum /counter
                              element[month] = octAvg.toFixed(2)
-                            // console.log(ymd + " " + "sum: " + parseFloat(octSum)  + " counter: " + counter + " result: " + octAvg)
                              break;
                          case "11":
                              novSum += parseFloat(element[ymd])
                              novAvg = novSum /counter
                              element[month] = novAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(novSum)  + " counter: " + counter + " result: " + novAvg)
                              break;
                          case "12":
                              decSum += parseFloat(element[ymd])
                              decAvg = decSum /counter
                              element[month] = decAvg.toFixed(2)
-                           //  console.log(ymd + " " + "sum: " + parseFloat(decSum)  + " counter: " + counter + " result: " + decAvg)
                              break;
                          default:
                      }

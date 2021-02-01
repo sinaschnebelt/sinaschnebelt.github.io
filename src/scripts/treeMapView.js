@@ -59,15 +59,15 @@ function createTreeChart(data, monthparam){
     d3.select("#treemapwrapper").select("svg").remove();
 
     var margin = {top: 0, right: 30, bottom: 30, left: 30},
-        width = 580 - margin.left - margin.right,
-        height = 350 - margin.top - margin.bottom;
+        width = 700 - margin.left - margin.right,
+        height = 340 - margin.top - margin.bottom;
 
     var svg = d3.select("#treemapwrapper")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 580 350")
+        .attr("viewBox", "0 0 700 340")
         .classed("svg-content-responsive", true)
         .append("g")
         .attr("transform", "translate(" +margin.left + "," + margin.top + ")");
@@ -93,11 +93,11 @@ function createTreeChart(data, monthparam){
     // Explanation from https://stackoverflow.com/questions/42546344/how-to-apply-specific-colors-to-d3-js-map-based-on-data-values?rq=1
     const color= d3.scale.linear()
                 .domain([30, 280])
-                .range(["#D29C1A", "#3C8863"]);
+                .range(["#8fba82", "#037c87"]);
               
 
     var blName= data[0].region;
-    //console.log(treemap.leaves());
+
 
     // use this information to add rectangles:
     svg
@@ -120,23 +120,23 @@ function createTreeChart(data, monthparam){
         .enter()
         .append("text")
         .attr("x", function(d){ return d.x0+5})    // +10 to adjust position (more right)
-        .attr("y", function(d){ return d.y0+20})    // +20 to adjust position (lower)
+        .attr("y", function(d){ return d.y0+18})    // +20 to adjust position (lower)
         .each(function (d){
         substring = d.data.region.substring(0, d.data.region.indexOf("-")+1);
         if (substring == "")
             d3.select(this).text(d.data.region)
         else{
             d3.select(this).text(d.data.region.substring(0, d.data.region.indexOf("-")+1));
-            d3.select(this).append('svg:tspan').attr('x', function(d){ return d.x0+5}).attr('dy', 20).text(d.data.region.substring(d.data.region.indexOf("-")+1, d.data.region.length))
+            d3.select(this).append('svg:tspan').attr('x', function(d){ return d.x0+5}).attr('dy', 13).text(d.data.region.substring(d.data.region.indexOf("-")+1, d.data.region.length))
         }
         })
-        .attr("font-size", "14px")
+        .attr("font-size", "13px")
         .attr("fill", "white")
         .append('svg:tspan')
         .attr('x', function(d){ return d.x0+5})
-        .attr('dy', 20)
+        .attr('dy', 18)
         .text(function(d){ return d.data[monthparam]+"%"})
-        .attr("font-size", "16px")
+        .attr("font-size", "14px")
         .attr("font-weight", "bold")
         .attr("fill", "white")
 }

@@ -1,3 +1,21 @@
+
+:root {
+
+
+    --main: #0f5858;
+    /* #024e55; */
+
+     /* #3c6769; */
+     /* #3C6955; */
+    --first: #abba82;
+    --second: #a7b5b7;
+    --third: #037c87;
+    --forth: #102020;
+
+
+}
+
+
 h1 {
   font-family: Montserrat, Arial, Helvetica, sans-serif;
   font-weight: 200;
@@ -47,6 +65,7 @@ display: table !important;
   align-items: center;
   justify-content: center;
 
+
 }
 
 .svg-container {
@@ -72,7 +91,7 @@ display: table !important;
 }
 
 #titleContainer{
-  background-color: teal;
+  background-color: var(--main);
   text-align: center;
   font-size: 1.7rem;
   font-weight: bold;
@@ -81,7 +100,6 @@ display: table !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1vh;
 
 }
 
@@ -90,7 +108,8 @@ display: table !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5;
+
+
 }
 .btn-group{
   margin-right: auto;
@@ -99,15 +118,20 @@ display: table !important;
 }
 .btn-group>.btn-inactive {
   background-color: #e5f2f2;
-  width: 12.8vh;
+
+  height: 3.8vh;
   margin-top: 3px;
-  color:teal
+  color: var(--main);
+  text-align: center;
 }
 
 .btn-group>.btn {
   -webkit-box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0px rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0);
   white-space: normal;
+  line-height: 3vh;
+  width: 12.9vh;
+  padding: 0
 
 }
 
@@ -120,47 +144,67 @@ display: table !important;
 }
 
 #selectedDate{
-  background-color:teal;
+  background-color:var(--main);;
   color: white
 }
-#selectedTransport{
-  background-color: #cfd9dd;
-  border: solid teal;
-  cursor: pointer;
-}
+
 #treemapOption{
-  background-color:teal;
+  background-color:var(--main);;
 }
 
 #visualisationContainer{
   min-height: 100vh;
   background-color: #e5f2f2;
 }
+#circleContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 #treemapContainer{
   min-height: 100vh;
   padding:7vh;
+
 }
 #treemapwrapper{
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }
 #treemapwrapper2{
   display: flex;
   align-items: center;
   justify-content: center;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 }
+#treemap2{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#circularbarplot{
+  display: flex!important;
+  align-items: center;
+  justify-content: center;
+}
+
 #iconContainer{
-  padding-top: 4vh; 
-  padding-bottom: 2vh; 
-  height:8vh; 
+  padding-top: 3.7vh; 
+  height:6.5vh; 
   margin-bottom:0px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .icons{
-  height:7vh; 
+  height:5vh; 
   margin-left:auto;
   margin-right:auto;
 
@@ -173,35 +217,47 @@ display: table !important;
   padding:50px;
 }
 
-#car{
+.selectedTransport{
+  cursor: pointer;
+  filter: grayscale(0%); 
+  filter: brightness(1.15); 
+}
+.unselectedTransport{
+  filter: grayscale(70%); 
 
+}
 
-  height: 45px;
+#driving{
+  height: 27px;
   background-image: url('../src/img/Auto_icon.png');
   background-repeat: no-repeat;
   background-size: contain;
+  margin-right: 3.5vh;;
 
 }
 #transit{
 
-  height: 50px;
+  height: 30px;
   background-image: url('../src/img/Transit_icon.png');
   background-repeat: no-repeat;
   background-size: contain;
 
 }
-#walk{
-
-
-  height: 50px;
+#walking{
+  height: 30px;
   background-image: url("../src/img/Walking_icon.png");
   background-repeat: no-repeat;
   background-size: contain;
 
 }
 
+.transport{
+  margin: 2vh;
+}
+
 #lineChartContainer{
-  padding-top: 40px;
+  padding-top: 70px;
+
   height: 30vh;
   display: flex;
   align-items:center;
@@ -233,7 +289,6 @@ display: table !important;
 } 
 
 #BevölkerungsdichteContainer>div>div{
-
   margin: auto;
   padding-bottom: auto;
   
@@ -257,6 +312,15 @@ display: table !important;
   will-change: top, opacity;
 }
 
+.modal-trigger{
+  /* position: absolute;
+  top: 93% */
+}
+
+.modal-action .modal-close .btn  {
+ background-color: var(--main);
+}
+
 #toast-container {
   right: auto !important;
   bottom: 50%;
@@ -265,8 +329,9 @@ display: table !important;
 }
 
 .material-icons{
-  color: teal;
+  color: var(--main);;
 }
+
 .tabContainer .tabs{
   height:5vh;
   width: 80%;
@@ -281,7 +346,7 @@ display: table !important;
 }
 
 .tabs .tab a{
-  color:teal!important;
+  color:var(--main)!important;
   background-color: white;
   font-size: 1.5vh!important;
   
@@ -297,7 +362,7 @@ display: table !important;
 
 }
 .tabs .tab a.active {
-  background-color:teal!important;
+  background-color:var(--main)!important;
   color:white!important;
   height:5vh!important;
 
@@ -308,3 +373,5 @@ display: table !important;
   height: 1vh;
 
 } /*Color of underline*/
+
+

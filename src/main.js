@@ -1,12 +1,15 @@
 import { InitializeSVG, UpdateLineChartPathMonth, ShowDEData, AddBundeslandToLineChart, RemoveBundeslandFromLineChart } from './scripts/lineChartView.js';
-import { GetDateForFetch, allMonths } from './scripts/datePicker.js';
+import { GetDateForFetch } from './scripts/datePicker.js';
 import { LoadMap } from './scripts/mapGermany.js';
 import { Displaymobilitydata } from './scripts/treeMapView.js';
 import { UpdateSelectedRegionsList } from './scripts/treeMapMobilityView.js';
-import { AllData } from './data/summedData.js';
+import { Covid19casesGermanyMonthly } from './data/covid19Cases.js';
+import { GetOfflineData } from './scripts/dataHelperFunctions.js';
+import { Displaydestinationdata } from './scripts/circularBarplotView.js';
 
 const dateButtons = document.getElementsByClassName('date');
 const transportButton = document.getElementsByClassName('transport')
+let car = document. getElementById("car");
 
 let selectedBL = [];
 let blData ={};
@@ -14,10 +17,8 @@ let blData ={};
 function initialiseEvents(){
 
     // Load map and add the mutation observer to its text fields
-    // LoadMap().then(() => mutationObserverMap());
     LoadMap().then(function(){
         mutationObserverMap();
-        //mutationObserverTreeMap();
     } );
 
     eventListenerDatePicker();
@@ -28,15 +29,19 @@ function initialiseEvents(){
         $('.tabs').tabs();
         $('.tooltipped').tooltip();
         $('.modal').modal();
-        getBlDichte();    
+        getBlDichte(); 
+        // If the following line isn't commented out the fetched Covid19 cases data is automatically downloaded  
+        //GetOfflineData(); 
     })    
 
     Displaymobilitydata(GetDateForFetch());
+    Displaydestinationdata(GetDateForFetch());
     
-    ShowDEData(GetDateForFetch(), AllData)
+    ShowDEData(GetDateForFetch(), Covid19casesGermanyMonthly)
 
     eventListenerTreemap();
-    transportButton[0].setAttribute("id", "selectedTransport");
+
+    transportButton[0].classList.add("selectedTransport");
 }
 
 function eventListenerDatePicker() {
@@ -44,20 +49,19 @@ function eventListenerDatePicker() {
      //adds an event listener for every Date in the Dropdown
     for(let date of dateButtons){
         date.addEventListener('click', ()=> {
-            //mutationObserverMap();
 
-            //datePickerButton.textContent = date.textContent;
             if(document.getElementById('selectedDate') !== null){
                 document.getElementById('selectedDate').removeAttribute("id");
             }
 
             date.setAttribute("id", "selectedDate");
            
-            ShowDEData(GetDateForFetch(), AllData);
+            ShowDEData(GetDateForFetch(), Covid19casesGermanyMonthly);
             //when date is selected: update lineChart for every checked BL in the map    
             UpdateLineChartPathMonth(GetDateForFetch(), selectedBL)
 
-            Displaymobilitydata(GetDateForFetch(), document.getElementById('selectedTransport').name);
+            Displaymobilitydata(GetDateForFetch(), document.getElementsByClassName('selectedTransport').name);
+            Displaydestinationdata(GetDateForFetch());
 
             selectedBL.forEach(bl =>{
                 updateTreeMap(bl, undefined)
@@ -71,14 +75,17 @@ function eventListenerDatePicker() {
 function eventListenerTreemap(){
 
     for (let count=0; count < transportButton.length; count++){
+
         transportButton[count].addEventListener('click', (event) =>{
 
-            if(document.getElementById('selectedTransport') != null){
-                document.getElementById('selectedTransport').removeAttribute("id");
+            if(document.getElementsByClassName('selectedTransport') != null){
+                document.getElementsByClassName('selectedTransport')[0].classList.add("unselectedTransport");
+                document.getElementsByClassName('selectedTransport')[0].classList.remove("selectedTransport");
             }
-            event.target.setAttribute("id", "selectedTransport");
+            event.target.classList.remove("unselectedTransport");
+            event.target.classList.add("selectedTransport");
 
-            Displaymobilitydata(GetDateForFetch(), event.target.name)
+            Displaymobilitydata(GetDateForFetch(), event.target.id)
         })
     }
 }
@@ -86,13 +93,12 @@ function eventListenerTreemap(){
 
 
 function updateTreeMap(bl, newBLWasSelected){
-      // console.log(bl+ " " + newBLWasSelected)
+
     let monthChanged = false;
     if(newBLWasSelected === undefined) {
         newBLWasSelected = true;
         monthChanged = true;
-    } 
-    
+    }     
     UpdateSelectedRegionsList(bl, newBLWasSelected, GetDateForFetch(), monthChanged, selectedBL);
 }
 

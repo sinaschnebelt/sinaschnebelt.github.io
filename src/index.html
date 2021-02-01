@@ -46,7 +46,7 @@
     <div class="row">
         <div class="col s4">
             <div class="row" id="titleContainer">
-                <p style = "font-size:1.3vw;">Auswirkungen der Covid-19 Pandemie auf die Mobilität 2020</p>
+                <p style = "font-size:1.3vw;">Auswirkungen der Covid-19 Pandemie <br>auf die Mobilität 2020</p>
             </div>
 
             <div class="row" id="btnContainer" >
@@ -116,22 +116,23 @@
                     <div class="row">
                         <div class="col s12 tabContainer" >
                           <ul class="tabs" >
-                            <li class="tab col s6"><a class="active" href="#treemap1">Deutschland gesamt</a></li>
-                            <li class="tab col s6"><a href="#treemap2">Ausgewählte Bundesländer</a></li>
+                            <li class="tab col s4"><a class="active" href="#treemap1">Deutschland</a></li>
+                            <li class="tab col s4"><a href="#treemap2">Bundesländer</a></li>
+                            <li class="tab col s4"><a href="#circularbarplotContainer">Ziele</a></li>
                           </ul>
                         </div>
 
                         <div id="treemap1" class="col s12">
                             <div class="row " id="iconContainer">
-                                <div class="col s3"  id="icons" style="margin-left: 40%; margin-right: auto;">
+                                <div class="col s3"  id="icons" style="margin-left: 43%; margin-right: auto;">
                                     <div class ="row">                                     
-                                        <div class=" col s4" id="car" > </div>
-                                        <div class=" col s4" id="walk"> </div>
-                                        <div class=" col s4" id="transit"> </div>
+                                        <div class=" col s2 transport " id="driving" name="car"> </div>
+                                        <div class=" col s2 transport unselectedTransport" id="walking" name= "walk"> </div>
+                                        <div class=" col s2 transport unselectedTransport" id="transit" name="transit"> </div>
                                     </div>
                                     
                                 </div>
-                                <div class="col s1" style="margin-left: 0;">
+                                <div class="col s1" >
                                     <!-- Modal Trigger -->
                                     <a class="modal-trigger" href="#modalTM1" > <i class="small material-icons">info</i></a>
                                 </div>
@@ -140,27 +141,41 @@
                             <div class="row">
                                 <!-- Container for Treemap with Mobility -->
                                 <div class="col s12" id="treemapwrapper"></div>
-
+        
                             </div>
                         </div>
                         <div id="treemap2" class="col s12">
                             <div class="row " id="iconContainer">
-                                
                                 <div class="col s1" >
                                     <!-- Modal Trigger -->
                                     <a class="modal-trigger" href="#modalTM2" > <i class="small material-icons">info</i></a>
                                 </div>
-
                             </div>
                             <div class="row">
                                 <!-- Container for Treemap with Mobility -->
-                                <div id="treemapwrapper2"></div>
+                                <div class="col s12"  id="treemapwrapper2"></div>
+
+      
 
                             </div>
                         </div>
+
+                        <div class="col s12" id="circularbarplotContainer">
+                            <div class="row " id="iconContainer">
+                                <div class="col s1" >
+                                    <!-- Modal Trigger -->
+                                    <a class="modal-trigger" href="#modalCBP" > <i class="small material-icons">info</i></a>
+                                </div>
+                            </div>
+                            <div class = "row" > 
+                                <div id="circularbarplot"> </div>
+                            </div>
+                        </div>
+
+                            
+                        </div>
                     </div>
                 </div>
-                <!-- <div class="col s5" id="wordCloudContainer">WordCircle</div> -->
             </div>
 
 
@@ -169,26 +184,45 @@
         <!-- Modal Structure -->
         <div id="modalTM1" class="modal">
             <div class="modal-content">
-            <h4>Verkehrmittel-Nutzung in Deutschland</h4>
-            <p>Diese Treemap zeigt die monatliche Nutzung verschiedener Vekehrsmittel (Auto, Gehen, Nahverkehr) in %. Die Werte sind relativ im Verhältnis zum 13.Januar 2020, welcher die 100% Baseline darstellt. Wähle ein Transportmittel, um die jeweiligen Informationen zu erhalten.
+            <h4>Verkehrsmittel-Nutzung in Deutschland</h4>
+            <p>Diese Treemap zeigt die prozentuale monatliche Nutzung verschiedener Vekehrsmittel (Auto, Gehen, Nahverkehr) in ganz Deutschland. 
+                Die Werte sind relativ im Verhältnis zum 13. Januar 2020, welcher die 100% Baseline darstellt. 
+                Liegt der Wert beispielsweise über 100%, wurde das entsprechende Verkehrsmittel in dem ausgewählten Monat häufiger genutzt als im Januar 2020.
+                Wähle ein Transportmittel.
             </p>
 
             </div>
             <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-red btn brown darken-3">Close</a>
+            <a href="#!" class="modal-action modal-close btn " style="background-color: #0f5858;">Okay</a>
             </div>
         </div>
 
         <!-- Modal Structure -->
         <div id="modalTM2" class="modal">
             <div class="modal-content">
-            <h4>Verkehrmittel-Nutzung in Deutschland</h4>
-            <p>Diese Treemap zeigt die monatliche Nutzung verschiedener Vekehrsmittel (Auto, Gehen, Nahverkehr) in %. Die Werte sind relativ im Verhältnis zum 13.Januar 2020, welcher die 100% Baseline darstellt. Wähle bis zu 3 Bundesländer aus.
+            <h4>Verkehrsmittel-Nutzung in ausgewählten Bundesländern</h4>
+            <p>Diese Treemap zeigt die prozentuale monatliche Nutzung verschiedener Vekehrsmittel (Auto, Gehen, Nahverkehr) ausgewählter Bundesländer. 
+                Die Werte sind relativ im Verhältnis zum 13. Januar 2020, welcher die 100% Baseline darstellt.
+                Liegt der Wert beispielsweise über 100%, wurde das entsprechende Verkehrsmittel in dem ausgewählten Monat häufiger genutzt als im Januar 2020.
+                Wähle bis zu 3 Bundesländer aus.
             </p>
 
             </div>
             <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close waves-effect waves-red btn brown darken-3">Close</a>
+            <a href="#!" class="modal-action modal-close btn " style="background-color: #0f5858;">Okay</a>
+            </div>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="modalCBP" class="modal">
+            <div class="modal-content">
+            <h4>Bewegungsmuster in Deutschland</h4>
+            <p>Dieser Barplot zeigt die prozentualen Google-Maps Anfragen zu Wegbeschreibungen. Die Ziele der Anfragen sind Haltestellen und Apotheken. Der Referenzwert ist der Medianwert im Zeitraum vom 3. Januar bis zum 6. Februar 2020.
+            </p>
+
+            </div>
+            <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close btn " style="background-color: #0f5858;">Okay</a>
             </div>
         </div>
 
